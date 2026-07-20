@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import App from "./App.tsx";
 import JokiTugas from "./JokiTugas.tsx";
+import ViraLanding from "./ViraLanding.tsx";
 import ViraPrivacy from "./ViraPrivacy.tsx";
 import ViraTerms from "./ViraTerms.tsx";
 import "./index.css";
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/joki-tugas" element={<JokiTugas />} />
+        <Route path="/vira" element={<ViraLanding />} />
         <Route path="/vira/privacy" element={<ViraPrivacy />} />
         <Route path="/vira/terms" element={<ViraTerms />} />
         <Route path="/vira/privacy-policy" element={<Navigate to="/vira/privacy" replace />} />

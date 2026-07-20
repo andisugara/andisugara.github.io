@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import bangkitImg from "./assets/bangkit.jpg";
 import webinarPemalang from "./assets/sosialisasi_pemalang.jpg";
 import androidIntermediate from "./assets/android_intermediate.jpg";
@@ -23,6 +24,10 @@ import {
   Star,
   ArrowUp,
   Lock,
+  Bot,
+  Sparkles,
+  Wallet,
+  Calendar,
 } from "lucide-react";
 import {
   SiDocker,
@@ -552,6 +557,154 @@ const App: React.FC = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* VIRA Product Showcase Section */}
+      <section className="px-6 md:px-20 py-20 bg-gradient-to-b from-indigo-950/20 via-purple-950/20 to-transparent relative overflow-hidden border-y border-white/10">
+        {/* Background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-600/15 blur-[120px] pointer-events-none rounded-full" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-4">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Featured Flagship Product
+            </div>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+              VIRA AI Assistant
+            </h2>
+            <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto">
+              Virtual Intelligent Reminder & Personal Finance Assistant berbasis AI dengan integrasi WhatsApp Bot, Web Dashboard, dan Google Calendar Sync.
+            </p>
+          </div>
+
+          {/* Product Showcase Card */}
+          <div className="bg-gradient-to-br from-indigo-900/40 via-slate-900/80 to-purple-950/40 rounded-3xl p-8 md:p-12 border border-indigo-500/30 shadow-2xl shadow-indigo-900/20">
+            <div className="grid lg:grid-cols-12 gap-8 items-center">
+              {/* Left Column - Product Info */}
+              <div className="lg:col-span-7 space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 shrink-0">
+                    <Bot className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-2">
+                      VIRA AI Assistant
+                    </h3>
+                    <div className="flex items-center gap-2 text-sm text-indigo-300 font-mono mt-0.5">
+                      <span>Live App:</span>
+                      <a
+                        href="https://asistant.sugara.my.id"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline hover:text-white flex items-center gap-1 font-semibold text-indigo-400"
+                      >
+                        asistant.sugara.my.id <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                  Asisten cerdas pribadi yang membantu Anda mencatat transaksi keuangan secara alami via pesan WhatsApp (otomatis deteksi pemasukan, pengeluaran, transfer & saldo dompet), memberikan pengingat terjadwal, dan menyinkronkan event langsung ke <strong>Google Calendar</strong> Anda.
+                </p>
+
+                {/* Tech & Capabilities Pill Badges */}
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <span className="px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-xs font-medium flex items-center gap-1.5">
+                    <SiWhatsapp className="w-3.5 h-3.5 text-green-400" /> WhatsApp AI Bot
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-medium flex items-center gap-1.5">
+                    <Wallet className="w-3.5 h-3.5 text-purple-400" /> Financial Tracker
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-pink-500/20 border border-pink-500/30 text-pink-300 text-xs font-medium flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-pink-400" /> Google Calendar Sync
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-xs font-medium flex items-center gap-1.5">
+                    <Bot className="w-3.5 h-3.5 text-blue-400" /> Gemini AI Parser
+                  </span>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-wrap items-center gap-4 pt-4">
+                  <a
+                    href="https://asistant.sugara.my.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold text-sm shadow-xl shadow-indigo-600/30 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
+                  >
+                    <span>Coba VIRA App</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+
+                  <Link
+                    to="/vira"
+                    className="px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm transition-all flex items-center gap-2"
+                  >
+                    <span>Landing Page VIRA</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right Column - App Domain Preview Card */}
+              <div className="lg:col-span-5">
+                <div className="p-6 rounded-2xl bg-slate-950/80 border border-indigo-500/30 space-y-4 shadow-xl">
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                    </div>
+                    <span className="text-xs text-indigo-400 font-mono bg-indigo-950/80 px-3 py-1 rounded-md border border-indigo-500/30">
+                      asistant.sugara.my.id
+                    </span>
+                  </div>
+
+                  <div className="space-y-3 text-xs text-slate-300">
+                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-start gap-3">
+                      <div className="p-2 rounded-lg bg-green-500/20 text-green-400 shrink-0">
+                        <SiWhatsapp className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-white">Natural Language WhatsApp Chat</div>
+                        <p className="text-[11px] text-slate-400">"Tarik 100k dari BNI", "Ingatkan rapat jam 2 siang"</p>
+                      </div>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-start gap-3">
+                      <div className="p-2 rounded-lg bg-indigo-500/20 text-indigo-400 shrink-0">
+                        <Calendar className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-white">Google OAuth 2.0 Integration</div>
+                        <p className="text-[11px] text-slate-400">Otomatis sync pengingat ke Google Calendar pribadi</p>
+                      </div>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-start gap-3">
+                      <div className="p-2 rounded-lg bg-purple-500/20 text-purple-400 shrink-0">
+                        <Wallet className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-white">Web Dashboard Analytics</div>
+                        <p className="text-[11px] text-slate-400">Grafik saldo, kategori pengeluaran, & AI Advisor</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a
+                    href="https://asistant.sugara.my.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 rounded-xl bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-500/40 text-indigo-200 font-semibold text-xs text-center flex items-center justify-center gap-2 transition-colors"
+                  >
+                    Kunjungi asistant.sugara.my.id <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
