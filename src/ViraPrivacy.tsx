@@ -4,7 +4,7 @@ import { Shield, ArrowLeft, ExternalLink, Mail, Globe, CheckCircle2, Lock } from
 
 export default function ViraPrivacy() {
   useEffect(() => {
-    document.title = "VIRA - Privacy Policy | Sugara Tech";
+    document.title = "VIRA - Privacy Policy | Sugara Dev";
     window.scrollTo(0, 0);
   }, []);
 
@@ -19,7 +19,7 @@ export default function ViraPrivacy() {
             </div>
             <div>
               <span className="font-bold text-white tracking-wide text-lg">VIRA</span>
-              <span className="text-xs text-indigo-400 block font-medium">by Sugara Tech</span>
+              <span className="text-xs text-indigo-400 block font-medium">by Sugara Dev</span>
             </div>
           </Link>
 
@@ -82,7 +82,7 @@ export default function ViraPrivacy() {
         <article className="prose prose-invert max-w-none space-y-8 text-slate-300 leading-relaxed">
           <section className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
             <p>
-              Welcome to <strong>VIRA (Virtual Intelligent Reminder Assistant)</strong>, operated by <strong>Sugara Tech</strong> ("we", "our", or "us").
+              Welcome to <strong>VIRA (Virtual Intelligent Reminder Assistant)</strong>, operated by <strong>Sugara Dev</strong> ("we", "our", or "us").
             </p>
             <p className="mt-3">
               This Privacy Policy explains how we collect, use, disclose, and protect your information when you use VIRA. By using our services, you agree to the practices described in this Privacy Policy.
@@ -108,7 +108,7 @@ export default function ViraPrivacy() {
               2. Information We Collect
             </h2>
             <p>Depending on the features you use, we may collect:</p>
-            
+
             <div className="space-y-3 pl-2">
               <h3 className="text-lg font-semibold text-indigo-300">Account Information</h3>
               <ul className="list-disc list-inside space-y-1 text-slate-300">
@@ -292,9 +292,9 @@ export default function ViraPrivacy() {
               12. Contact Us
             </h2>
             <p>If you have any questions regarding this Privacy Policy, please contact us:</p>
-            
+
             <div className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2 text-sm">
-              <div className="font-bold text-white text-base">Sugara Tech</div>
+              <div className="font-bold text-white text-base">Sugara Dev</div>
               <div className="flex items-center gap-2 text-slate-300">
                 <Mail className="w-4 h-4 text-indigo-400" />
                 <span>Email:</span>
@@ -318,7 +318,7 @@ export default function ViraPrivacy() {
       <footer className="border-t border-slate-800 py-8 text-center text-xs text-slate-500">
         <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div>
-            &copy; 2026 Sugara Tech. All rights reserved. VIRA (Virtual Intelligent Reminder Assistant).
+            &copy; 2026 Sugara Dev. All rights reserved. VIRA (Virtual Intelligent Reminder Assistant).
           </div>
           <div className="flex items-center gap-4">
             <Link to="/vira/privacy" className="hover:text-slate-300">Privacy Policy</Link>
