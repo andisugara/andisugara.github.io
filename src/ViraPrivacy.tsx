@@ -4,7 +4,7 @@ import { Shield, ArrowLeft, ExternalLink, Mail, Globe, CheckCircle2, Lock } from
 
 export default function ViraPrivacy() {
   useEffect(() => {
-    document.title = "VIRA - Privacy Policy | Sugara Dev";
+    document.title = "VIRA AI Assistant - Privacy Policy | Sugara Dev";
     window.scrollTo(0, 0);
   }, []);
 
@@ -13,13 +13,13 @@ export default function ViraPrivacy() {
       {/* Header / Navbar */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-[#0f172a]/80 border-b border-slate-800">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/vira" className="flex items-center gap-2 group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
               <Shield className="w-5 h-5" />
             </div>
             <div>
-              <span className="font-bold text-white tracking-wide text-lg">VIRA</span>
-              <span className="text-xs text-indigo-400 block font-medium">by Sugara Dev</span>
+              <span className="font-bold text-white tracking-wide text-base sm:text-lg block leading-none">VIRA AI Assistant</span>
+              <span className="text-xs text-indigo-400 font-medium">by Sugara Dev</span>
             </div>
           </Link>
 
