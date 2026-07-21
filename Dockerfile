@@ -5,7 +5,8 @@ RUN npm install
 COPY . .
 # Skip TypeScript type checking and use Vite directly
 RUN echo "Building with Vite directly..." && \
-    npx vite build
+    npx vite build && \
+    node scripts/generate-static-pages.js
 
 FROM nginx:stable-alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
