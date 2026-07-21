@@ -19,14 +19,19 @@ function createPage(routePath, title, description, contentHtml) {
   let pageHtml = baseHtml;
   
   // Replace title
-  pageHtml = pageHtml.replace(/<title>.*?<\/title>/, `<title>${title}</title>`);
+  pageHtml = pageHtml.replace(/<title>.*?<\/title>/s, `<title>${title}</title>`);
 
   // Inject meta description
   const metaDesc = `<meta name="description" content="${description}" />\n    <meta property="og:title" content="${title}" />\n    <meta property="og:description" content="${description}" />`;
   pageHtml = pageHtml.replace('</head>', `  ${metaDesc}\n  </head>`);
 
-  // Inject content inside <div id="root">
-  pageHtml = pageHtml.replace('<div id="root"></div>', `<div id="root">${contentHtml}</div>`);
+  // Inject content inside <div id="root"> with regex matching any whitespace/newlines
+  const rootRegex = /<div id="root">\s*<\/div>/s;
+  if (rootRegex.test(pageHtml)) {
+    pageHtml = pageHtml.replace(rootRegex, `<div id="root">${contentHtml}</div>`);
+  } else {
+    console.warn('Warning: Could not match <div id="root"></div> pattern in HTML');
+  }
 
   // Target directory
   const relativePath = routePath.startsWith('/') ? routePath.slice(1) : routePath;
@@ -51,6 +56,8 @@ function createPage(routePath, title, description, contentHtml) {
     fs.writeFileSync(flatDashPath, pageHtml, 'utf-8');
     console.log(`Generated: ${flatDashPath}`);
   }
+
+  return pageHtml;
 }
 
 // ----------------------------------------------------------------------
@@ -179,105 +186,12 @@ const viraLandingHtml = `
 </div>
 `;
 
-createPage(
+const viraPageHtml = createPage(
   '/vira',
   'VIRA AI Assistant - Purpose, Features & Google OAuth Integration',
   'VIRA AI Assistant is a smart personal productivity application for managing reminders, Google Calendar sync, and personal finances.',
   viraLandingHtml
 );
-
-// ----------------------------------------------------------------------
-// 2. /vira/privacy Page
-// ----------------------------------------------------------------------
-const viraPrivacyHtml = `
-<div style="min-height: 100vh; background-color: #0f172a; color: #e2e8f0; font-family: system-ui, -apple-system, sans-serif; padding: 2rem 1rem;">
-  <header style="max-width: 1024px; margin: 0 auto 2rem auto; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 1rem;">
-    <div>
-      <a href="/vira" style="text-decoration: none;">
-        <h1 style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin: 0;">VIRA AI Assistant</h1>
-        <span style="font-size: 0.75rem; color: #818cf8;">by Sugara Dev</span>
-      </a>
-    </div>
-    <nav style="display: flex; gap: 1rem; font-size: 0.875rem;">
-      <a href="/vira/privacy" style="color: #818cf8; text-decoration: none; font-weight: 600;">Privacy Policy</a>
-      <a href="/vira/terms" style="color: #94a3b8; text-decoration: none;">Terms of Service</a>
-    </nav>
-  </header>
-
-  <main style="max-width: 896px; margin: 0 auto;">
-    <div style="margin-bottom: 2rem; border-bottom: 1px solid #1e293b; padding-bottom: 1.5rem;">
-      <h1 style="font-size: 2.25rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem;">Privacy Policy</h1>
-      <p style="color: #94a3b8; font-size: 0.875rem;">Effective Date: July 21, 2026</p>
-    </div>
-
-    <div style="padding: 1.25rem; border-radius: 1rem; background: rgba(49, 46, 129, 0.4); border: 1px solid rgba(99, 102, 241, 0.3); margin-bottom: 2rem;">
-      <h3 style="font-size: 1rem; font-weight: 700; color: #ffffff; margin-top: 0; margin-bottom: 0.5rem;">
-        Google OAuth Verification & Limited Use Compliance
-      </h3>
-      <p style="font-size: 0.875rem; color: #cbd5e1; line-height: 1.6; margin: 0;">
-        VIRA AI Assistant strictly adheres to the <strong>Google API Services User Data Policy</strong>, including the <strong>Limited Use</strong> requirements. User data accessed via Google APIs is solely used to provide calendar reminder synchronization and is never shared, sold, or used for advertising.
-      </p>
-    </div>
-
-    <article style="line-height: 1.7; font-size: 0.9375rem; color: #cbd5e1;">
-      <section style="margin-bottom: 2rem;">
-        <p>Welcome to <strong>VIRA AI Assistant (Virtual Intelligent Reminder Assistant)</strong>, operated by <strong>Sugara Dev</strong> ("we", "our", or "us").</p>
-        <p>This Privacy Policy explains how we collect, use, disclose, and protect your information when you use VIRA AI Assistant. By using our services, you agree to the practices described in this Privacy Policy.</p>
-      </section>
-
-      <section style="margin-bottom: 2rem;">
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; border-left: 4px solid #6366f1; padding-left: 0.75rem;">1. About VIRA AI Assistant</h2>
-        <p>VIRA AI Assistant is an AI-powered virtual assistant that helps users manage reminders, organize schedules, track personal finances, and automate productivity through WhatsApp and supported platforms.</p>
-        <p>Some features require access to third-party services such as Google Calendar. Access is only granted after you explicitly authorize VIRA AI Assistant through Google's OAuth authorization process.</p>
-      </section>
-
-      <section style="margin-bottom: 2rem;">
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; border-left: 4px solid #6366f1; padding-left: 0.75rem;">2. Information We Collect</h2>
-        <p>Depending on the features you use, we may collect:</p>
-        <h3 style="font-size: 1rem; font-weight: 600; color: #a5b4fc;">Account Information</h3>
-        <ul><li>Name</li><li>Email address</li><li>Profile information provided by your authentication provider</li></ul>
-        <h3 style="font-size: 1rem; font-weight: 600; color: #a5b4fc;">Google Account Information</h3>
-        <p>When you choose to connect your Google Account, we may access:</p>
-        <ul><li>Google Calendar information necessary to create, update, or delete calendar events.</li><li>Authentication tokens required to maintain your connection.</li></ul>
-        <p style="color: #818cf8; font-weight: 600;">We never collect or store your Google password.</p>
-      </section>
-
-      <section style="margin-bottom: 2rem;">
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; border-left: 4px solid #6366f1; padding-left: 0.75rem;">3. How We Use Your Information</h2>
-        <p>We use your information only to provide and improve VIRA AI Assistant, including:</p>
-        <ul>
-          <li>Creating and managing reminders</li>
-          <li>Synchronizing reminders with Google Calendar</li>
-          <li>Processing AI assistant requests</li>
-          <li>Providing customer support</li>
-          <li>Maintaining service security</li>
-        </ul>
-        <p style="color: #34d399; font-weight: 600;">We do not use your personal information for advertising purposes.</p>
-      </section>
-
-      <section style="margin-bottom: 2rem; padding: 1.25rem; border-radius: 1rem; background: #020617; border: 1px solid #1e293b;">
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; border-left: 4px solid #6366f1; padding-left: 0.75rem; margin-top: 0;">4. Google API Services</h2>
-        <p>VIRA AI Assistant uses Google APIs solely to provide features that you explicitly request.</p>
-        <p>Google Calendar access is used only to create calendar events, update existing events, delete events upon request, and read calendar information only when necessary.</p>
-        <p>We do not sell, transfer, or use Google user data for advertising, profiling, or any unrelated purpose.</p>
-        <p style="color: #a5b4fc;">
-          VIRA AI Assistant's use and transfer of information received from Google APIs adheres to the <strong>Google API Services User Data Policy</strong>, including the <strong>Limited Use</strong> requirements.
-        </p>
-      </section>
-
-      <section style="margin-bottom: 2rem;">
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; border-left: 4px solid #6366f1; padding-left: 0.75rem;">5. Contact Us</h2>
-        <p>If you have any questions regarding this Privacy Policy, please contact us:</p>
-        <p><strong>Sugara Dev</strong><br />Email: <a href="mailto:sugaraandi9@gmail.com" style="color: #818cf8;">sugaraandi9@gmail.com</a><br />Website: <a href="https://sugara.my.id" style="color: #818cf8;">https://sugara.my.id</a></p>
-      </section>
-    </article>
-  </main>
-
-  <footer style="max-width: 896px; margin: 3rem auto 0 auto; padding-top: 1.5rem; border-top: 1px solid #1e293b; text-align: center; font-size: 0.75rem; color: #64748b;">
-    &copy; 2026 Sugara Dev. All rights reserved. VIRA AI Assistant.
-  </footer>
-</div>
-`;
 
 createPage(
   '/vira/privacy',
@@ -286,60 +200,6 @@ createPage(
   viraPrivacyHtml
 );
 
-// ----------------------------------------------------------------------
-// 3. /vira/terms Page
-// ----------------------------------------------------------------------
-const viraTermsHtml = `
-<div style="min-height: 100vh; background-color: #0f172a; color: #e2e8f0; font-family: system-ui, -apple-system, sans-serif; padding: 2rem 1rem;">
-  <header style="max-width: 1024px; margin: 0 auto 2rem auto; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 1rem;">
-    <div>
-      <a href="/vira" style="text-decoration: none;">
-        <h1 style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin: 0;">VIRA AI Assistant</h1>
-        <span style="font-size: 0.75rem; color: #818cf8;">by Sugara Dev</span>
-      </a>
-    </div>
-    <nav style="display: flex; gap: 1rem; font-size: 0.875rem;">
-      <a href="/vira/privacy" style="color: #94a3b8; text-decoration: none;">Privacy Policy</a>
-      <a href="/vira/terms" style="color: #818cf8; text-decoration: none; font-weight: 600;">Terms of Service</a>
-    </nav>
-  </header>
-
-  <main style="max-width: 896px; margin: 0 auto;">
-    <div style="margin-bottom: 2rem; border-bottom: 1px solid #1e293b; padding-bottom: 1.5rem;">
-      <h1 style="font-size: 2.25rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem;">Terms of Service</h1>
-      <p style="color: #94a3b8; font-size: 0.875rem;">Effective Date: July 21, 2026</p>
-    </div>
-
-    <article style="line-height: 1.7; font-size: 0.9375rem; color: #cbd5e1;">
-      <section style="margin-bottom: 2rem;">
-        <p>Welcome to <strong>VIRA AI Assistant</strong>, an AI-powered virtual assistant operated by <strong>Sugara Dev</strong>.</p>
-        <p>These Terms of Service govern your access to and use of VIRA AI Assistant. By using our services, you agree to be bound by these Terms.</p>
-      </section>
-
-      <section style="margin-bottom: 2rem;">
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; border-left: 4px solid #6366f1; padding-left: 0.75rem;">1. About the Service</h2>
-        <p>VIRA AI Assistant provides AI-powered assistance including reminder management, Google Calendar integration, personal finance tracking, AI conversations, and productivity automation.</p>
-      </section>
-
-      <section style="margin-bottom: 2rem; padding: 1.25rem; border-radius: 1rem; background: #020617; border: 1px solid #1e293b;">
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; border-left: 4px solid #6366f1; padding-left: 0.75rem; margin-top: 0;">2. Google Account Authorization</h2>
-        <p>Certain features require authorization through your Google Account. By connecting your Google Account, you authorize VIRA AI Assistant to access only the permissions you explicitly approve. You may revoke access at any time through your Google Account settings.</p>
-      </section>
-
-      <section style="margin-bottom: 2rem;">
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; border-left: 4px solid #6366f1; padding-left: 0.75rem;">3. Contact</h2>
-        <p>For questions regarding these Terms, please contact:</p>
-        <p><strong>Sugara Dev</strong><br />Email: <a href="mailto:sugaraandi9@gmail.com" style="color: #818cf8;">sugaraandi9@gmail.com</a><br />Website: <a href="https://sugara.my.id" style="color: #818cf8;">https://sugara.my.id</a></p>
-      </section>
-    </article>
-  </main>
-
-  <footer style="max-width: 896px; margin: 3rem auto 0 auto; padding-top: 1.5rem; border-top: 1px solid #1e293b; text-align: center; font-size: 0.75rem; color: #64748b;">
-    &copy; 2026 Sugara Dev. All rights reserved. VIRA AI Assistant.
-  </footer>
-</div>
-`;
-
 createPage(
   '/vira/terms',
   'VIRA AI Assistant - Terms of Service | Sugara Dev',
@@ -347,6 +207,9 @@ createPage(
   viraTermsHtml
 );
 
-// Copy main index.html to 404.html as fallback
-fs.copyFileSync(baseHtmlPath, path.join(distDir, '404.html'));
-console.log('Generated fallback: dist/404.html');
+// Overwrite main index.html and 404.html with pre-rendered viraPageHtml fallback
+if (viraPageHtml) {
+  fs.writeFileSync(baseHtmlPath, viraPageHtml, 'utf-8');
+  fs.writeFileSync(path.join(distDir, '404.html'), viraPageHtml, 'utf-8');
+  console.log('Patched main index.html and 404.html with pre-rendered VIRA fallback!');
+}
