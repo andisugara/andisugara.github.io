@@ -15,8 +15,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/" element={<App />} />
         <Route path="/joki-tugas" element={<JokiTugas />} />
         <Route path="/vira" element={<ViraLanding />} />
+        <Route path="/vira.html" element={<ViraLanding />} />
         <Route path="/vira/privacy" element={<ViraPrivacy />} />
+        <Route path="/vira/privacy.html" element={<ViraPrivacy />} />
+        <Route path="/vira-privacy.html" element={<ViraPrivacy />} />
         <Route path="/vira/terms" element={<ViraTerms />} />
+        <Route path="/vira/terms.html" element={<ViraTerms />} />
+        <Route path="/vira-terms.html" element={<ViraTerms />} />
         <Route path="/vira/privacy-policy" element={<Navigate to="/vira/privacy" replace />} />
         <Route path="/vira/terms-of-service" element={<Navigate to="/vira/terms" replace />} />
       </Routes>

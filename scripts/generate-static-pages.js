@@ -40,10 +40,17 @@ function createPage(routePath, title, description, contentHtml) {
   fs.writeFileSync(indexPath, pageHtml, 'utf-8');
   console.log(`Generated: ${indexPath}`);
 
-  // Also write flat file e.g. dist/vira.html or dist/vira/privacy.html for legacy direct static resolution
   const flatPath = path.join(distDir, `${relativePath}.html`);
   fs.writeFileSync(flatPath, pageHtml, 'utf-8');
   console.log(`Generated: ${flatPath}`);
+
+  // If path is e.g. vira/privacy, also generate vira-privacy.html at root of dist
+  if (relativePath.includes('/')) {
+    const flatDashName = `${relativePath.replace(/\//g, '-')}.html`;
+    const flatDashPath = path.join(distDir, flatDashName);
+    fs.writeFileSync(flatDashPath, pageHtml, 'utf-8');
+    console.log(`Generated: ${flatDashPath}`);
+  }
 }
 
 // ----------------------------------------------------------------------
